@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+	<edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="1.0">
+		<Schema Namespace="NorthwindModel" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+
+			<EntityType Name="Product">
+				<Key>
+					<PropertyRef Name="POID" />
+				</Key>
+				<Property Name="POID" Type="Edm.Int32" Nullable="false" p8:StoreGeneratedPattern="Identity" xmlns:p8="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+				<Property Name="PONumber" Type="Edm.String" Nullable="false" MaxLength="40" Unicode="true" FixedLength="false" />
+				<Property Name="VendorID" Type="Edm.Int32" Nullable="true" />
+				<Property Name="Qty1" Type="Edm.Int32" Nullable="true" />
+				<Property Name="Qty2" Type="Edm.Int32" Nullable="true" Precision="19" Scale="4" />
+				<Property Name="Amount1" Type="Edm.Decimal" Nullable="true" />
+				<Property Name="Amount2" Type="Edm.Decimal" Nullable="true" />
+				<NavigationProperty Name="Supplier" Relationship="NorthwindModel.FK_Products_Suppliers" FromRole="Products" ToRole="Suppliers" />
+			</EntityType>
+
+			<EntityType Name="Supplier">
+				<Key>
+				   
+					<PropertyRef Name="VendorID" />
+					
+				</Key>
+				<Property Name="VendorID" Type="Edm.Int32" Nullable="false" p8:StoreGeneratedPattern="Identity" xmlns:p8="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+				<Property Name="VendorName" Type="Edm.String" Nullable="false" MaxLength="40" Unicode="true" FixedLength="false" />
+				<Property Name="Material" Type="Edm.String" Nullable="true" MaxLength="30" Unicode="true" FixedLength="false" />
+				
+				<NavigationProperty Name="Products" Relationship="NorthwindModel.FK_Products_Suppliers" FromRole="Suppliers" ToRole="Products" />
+			</EntityType>
+
+			<Association Name="FK_Products_Suppliers">
+				<End Role="Suppliers" Type="NorthwindModel.Supplier" Multiplicity="0..1" />
+				<End Role="Products" Type="NorthwindModel.Product" Multiplicity="*" />
+				<ReferentialConstraint>
+					<Principal Role="Suppliers">
+						<PropertyRef Name="VendorID" />
+					</Principal>
+					<Dependent Role="Products">
+						<PropertyRef Name="POID" />
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+
+		</Schema>
+
+		<Schema Namespace="ODataWeb.Northwind.Model" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityContainer Name="NorthwindEntities" p7:LazyLoadingEnabled="true" m:IsDefaultEntityContainer="true" xmlns:p7="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+
+				<EntitySet Name="Products" EntityType="NorthwindModel.Product" />
+				<EntitySet Name="Suppliers" EntityType="NorthwindModel.Supplier" />
+
+				<AssociationSet Name="FK_Products_Suppliers" Association="NorthwindModel.FK_Products_Suppliers">
+					<End Role="Suppliers" EntitySet="Suppliers" />
+					<End Role="Products" EntitySet="Products" />
+				</AssociationSet>
+
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

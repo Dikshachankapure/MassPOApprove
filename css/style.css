@@ -1,0 +1,43 @@
+/* Enter your custom styles here */
+
+.sapMLIBActive .sapMText, .sapMLIBActive .sapMListTblCell .sapMText, .sapMLIBActive .sapMListTblSubCntRow .sapMText
+{
+  color:#000000 !important;
+}
+.sapMLIBActive .sapMObjectNumber
+{
+ color:#000000 !important;
+}
+.sapMLIB.sapMLIBActive
+{
+ background-color:#DEEFF8 !important;
+}
+
+.ABC
+{
+     font-size: 20px;
+}
+div[class*="sapUiRespGrid"]>div[class*="sapUiRespGridSpan"]
+{
+	float:right !important;
+}
+@media only screen and (min-width: 320px) and (max-width: 480px){
+     
+       .sapUiRespGridMedia-Std-Phone.sapUiRespGridHSpace2>.sapUiRespGridSpanS8
+       {
+       		Width:90% !important;
+       }
+       .sapMListModeMultiSelect .sapMListTblSubCnt, .sapMListModeSingleSelectLeft .sapMListTblSubCnt
+       {
+       		padding-left:0px;
+       }
+	
+}
+@media only screen and (min-width: 480px) and (max-width: 960px){
+     
+       .sapUiRespGridMedia-Std-Tablet.sapUiRespGridHSpace2>.sapUiRespGridSpanM4
+       {
+       	 Width:97% !important;
+       }
+	
+}    

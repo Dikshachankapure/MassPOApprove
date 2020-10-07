@@ -1,0 +1,25 @@
+{
+	"PurchaseorderList": [{
+		"POID": 1,
+		"VendorID": 1,
+		"PONumber": "PO10000001(Vendor001)",
+		"Plant": "PL01",
+		"Qty1": 10,
+		"Qty2": 20,
+		"Amount1": 10.00,
+		"Amount2": 20.00,
+		"VendorName": "ABC",
+		"Material": "Material100"
+	}, {
+		"POID": 2,
+		"VendorID": 2,
+		"PONumber": "PO10000002(Vendor002)",
+		"Plant": "PL02",
+		"Qty1": 20,
+		"Qty2": 30,
+		"Amount1": 10.00,
+		"Amount2": 10.00,
+		"VendorName": "DEF",
+		"Material": "Material101"
+	}]
+}

@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+	    id="docTypeId1"
+		noDataText="No Products Found"
+		title="Purchase Order Items"
+		search="handlePOSearch"
+		confirm="onPOSelect"
+		items="{
+			path: '/DocumentTypes'
+		}" >
+		<StandardListItem
+			title="{DocTypeId}"
+			description="{DocTypeDesc}"
+			iconDensityAware="false"
+			iconInset="false"
+			type="Active" />
+	</SelectDialog>
+</core:FragmentDefinition>

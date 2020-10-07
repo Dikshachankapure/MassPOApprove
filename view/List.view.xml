@@ -1,0 +1,105 @@
+<mvc:View controllerName="MassPOApprove.controller.List" displayBlock="true" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:viz="sap.viz.ui5.controls" xmlns:f="sap.ui.layout.form" xmlns:semantic="sap.m.semantic" xmlns="sap.m" xmlns:layout="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<Page navButtonPress="onNavBack" showNavButton="true" title="{i18n>title}">
+		<content>
+			<layout:Grid
+				class="sapUiSmallMarginTop"
+				hSpacing="2"
+				defaultSpan="L6 M6 S10">
+				<layout:content>
+					<VBox>
+						<Text text="Document Type : " class="doctxt"/>
+						<ComboBox items="{/results}" id="doctyp" placeholder="Select" selectionChange="handleDocTypeSearch" width="100%" class="docbox" showSecondaryValues="true">
+								<core:ListItem key="{DocTypeId}" text="{DocTypeDesc}" additionalText="{DocTypeId}" />
+						</ComboBox>
+						<SearchField id="searchField" search="handlePOSearch" placeholder="Search by PO Number" tooltip="{i18n>worklistSearchTooltip}" width="auto"/>
+						<layoutData>
+							<layout:GridData
+								span="L4 M4 S8"
+								linebreakL="false"
+								linebreakM="false"
+								linebreakS="false" />
+						</layoutData>
+					</VBox>
+				</layout:content>
+			</layout:Grid>
+			<Table class="sapUiResponsiveMargin sapUiNoMarginTop" growing="true" growingScrollToLoad="false" id="table" growingThreshold="10"
+				items="{ path: '/results', parameters: { 'expand': 'POItemsSet' }}" mode="MultiSelect" noDataText="{worklistView]/tableNoDataText}"
+				width="auto" headerText="po">
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader" text="Purchase Orders"/>
+						<ToolbarSpacer/>
+						
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column id="ponoColumn" mergeDuplicates="true">
+						<Text id="colPonumber" text="{i18n>TablePONumber}" class="ABC"  width="25%"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Navigation" press="onPress">
+						<cells>
+							<Panel class="sapUiContentPadding" headerText="{PONumber}({VendorDesc})" id="po">
+								<content>
+									<Table class="sapUiResponsiveMargin sapUiNoMarginTop" id="tblDetail" items="{ path:'POItemSet'}"
+										noDataText="{worklistView]/tableNoDataText}" width="auto">
+										<columns>
+											<Column minScreenWidth="Tablet" demandPopin="true" id="MaterialColumn" width="4rem">
+												<Text text="{i18n>TableMaterial}"/>
+											</Column>
+											<Column minScreenWidth="Tablet" demandPopin="true" id="PlantColumn" width="4rem">
+												<Text text="{i18n>TablePlant}"/>
+											</Column>
+											<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left" id="CurrQtyColumn" width="4rem">
+												<Text text="{i18n>TableCurrentQty}"/>
+											</Column>
+											<Column hAlign="Left" id="PrevQtyColumn" minScreenWidth="Tablet" width="4rem">
+												<Text text="{i18n>TablePreviousQty}"/>
+											</Column>
+											<Column hAlign="Left" id="CurrPriceColumn" minScreenWidth="Tablet" width="4rem">
+												<Text text="{i18n>TableCurrentPrice}"/>
+											</Column>
+											<Column hAlign="Left" id="PrevPriceColumn" minScreenWidth="Tablet" width="4rem">
+												<Text text="{i18n>TablePreviousPrice}"/>
+											</Column>
+											<Column hAlign="Left" id="DelDateColumn" minScreenWidth="Tablet" width="4rem">
+												<Text text="{i18n>TableDelDate}"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Inactive">
+												<cells>
+													<Text id="mat" text="{MaterialDesc}"/>
+													<Text id="plant" text="{PlantName}({Plant})"/>
+													<ObjectNumber number="{OrderQty}" unit="{QtyUnit}"/>
+													<ObjectNumber number="{AvaliableQty}" unit="{QtyUnit}"/>
+													<ObjectNumber number="{ path: 'CurrentPrice', formatter: '.formatter.numberUnit' }" unit="{PriceUnit}"/>
+													<ObjectNumber number="{ path: 'PreviousPrice', formatter: '.formatter.numberUnit' }" unit="{PriceUnit}"/>
+													<Text
+														text="{ path: 'DeliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss' }, pattern: 'dd-MMM-yyyy' } }"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</content>
+							</Panel>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<footer>
+			<Toolbar>
+				<content>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://accept" id="approve" press="onApprove" text="Approve" type="Accept"/>
+					<Button icon="sap-icon://decline" press="onReject" text="Reject" type="Reject"/>
+				</content>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>
